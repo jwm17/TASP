@@ -32,7 +32,7 @@ clear all;
 runname = 'test'; %Name of this run. Used in figure file names.
 
 %Select directory and add relevant paths. Can adjust as necessary.
-PC = 0;% (0=personal, 1=HPC, other=Imp.)
+PC = 0;% (0=personal, 1=HPC, other=work PC)
 
 if PC == 0
     cd 'C:\Users\Jim\OneDrive - Imperial College London\MATLAB\Modelling';
@@ -43,7 +43,7 @@ elseif PC == 1
     addpath '/rds/general/user/jwm17/home/MATLAB/provenance/scripts';
     addpath '/rds/general/user/jwm17/home/MATLAB/provenance/data_files';
     addpath '/rds/general/user/jwm17/home/MATLAB/provenance/scripts/Ant_Mapping_Tools';
-    W = 16; %Workers in parfor loop
+    W = 8; %Workers in parfor loop
 
 else
     cd 'C:\Users\jwm17\OneDrive - Imperial College London\MATLAB\Modelling';
@@ -68,7 +68,7 @@ palaeo = 0; %Is the ISM run modern (0) or not (1)?
 forcebergs = 1; %Force Wilkes Subglacial Basin ocean to mirror modern ice velocities (1 = on, 0 = off).
 method_file = 'SedTransMethCalibration_t1_11mar.mat'; % Method file used - only needed if palaeo = 1, otherwise a new one is created.
 t = 1; % Timeslice of output used. %for G21_T2_GRL_upload.nc, this goes to 240.
-site = [1655 -2282];%  [1572 -2111]; %U1358 [-9 -1564]; %U1521  %Set a core site location. In polar stereographic coordinates.
+site = [1655 -2282];%IODP U1361 %Set a core site location. In polar stereographic coordinates.
 sed_mod = 2; %Predicts erosion rate depending on input type. Can: can use squared ice velocity (=0); read 'quarryrate' directly from ISM (=1); or use product of basal shear and ice velocity (=2).
 hgrams = 0; % Option to make histogram plot at: point with most flowline endpoints (=1), specified site offshore from surface currents (=2). Only possible if seedmeth = 0.
 surf_months = 2; % Number of surface current months used. 324 recommended.
@@ -77,9 +77,9 @@ rep = 1; % Specify how many time bottom current/gravity flow methods are iterate
 radius3 = 200; % Radius of exclusion zone around active volcanoes (km) for plotting and statistics.
 %% Terrestrial component variables
 seedmeth = 1; %Method use to seed flowlines. Either randomly generated (=0), or using an erosion rate threshold and weighted (=1).
-s_points = 500; %Select the number of streamline seed locations used. Only used if seedmeth = 0. 32000 recommended.
+s_points = 32000; %Select the number of streamline seed locations used. Only used if seedmeth = 0. 32000 recommended.
 seedscale = 1; %Can increase the seed locations for the terrestrial part by this proportion. Note that only the number specified in 's_points' are read into the surface current estimate. Only used if seedmeth = 0.
-q_thresh = 3; %Erosion rate threshold for seed locations (mm/kyr). Only used if seedmeth = 1.
+q_thresh = 0; %Erosion rate threshold for seed locations (mm/kyr). Only used if seedmeth = 1.
 kval = 5.1E-10; % Value of quarrying coefficient. 0 uses spatially variable from Pollard and DeConto (2019), otherwise can specifiy a uniform value.
 %% Surface current method variables
 vweighting = 1; % Weighting of ice vs ocean velocities where no ocean velocity data. 1 recommended.
