@@ -658,7 +658,7 @@ if plot_figs == 1
     nrst_smpl_nans(nrst_smpl_nans == 0) = NaN;
     surf_diff = surf_diff.*nrst_smpl_nans;
 
-    ax2 = subplot(2,1,2);
+    ax(2) = subplot(2,1,2);
     mappingplotter(alatd,alond,surf_diff,-5,5,viridis);
     colormap(ax(2),divmap)
     hold on
